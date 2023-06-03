@@ -16,6 +16,10 @@ fun Application.configureRouting() {
             // https://ktor.io/docs/serialization.html#send_data
             call.respond(HttpStatusCode.OK, Foo("baz"))
         }
+
+        get("/healthz") {
+            call.respondText("OK")
+        }
     }
 }
 
