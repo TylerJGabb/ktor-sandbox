@@ -6,16 +6,18 @@ import io.ktor.server.testing.*
 import kotlin.test.*
 import io.ktor.http.*
 import com.example.plugins.*
+import io.ktor.client.call.*
 
 class ApplicationTest {
     @Test
     fun testRoot() = testApplication {
         application {
             configureRouting()
+            configureSerialization()
         }
-        client.get("/").apply {
+        client.get("/foo").apply {
             assertEquals(HttpStatusCode.OK, status)
-            assertEquals("Hello World!", bodyAsText())
+            assertEquals("""{"bar":"baz"}""", bodyAsText())
         }
     }
 }
